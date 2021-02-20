@@ -119,20 +119,24 @@ Widget tabs(List<Product> products, BuildContext context) {
                               SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3, childAspectRatio: 4 / 3),
                           itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              child: Card(
-                                color: HexColor("d4e2d4"),
-                                child: ListTile(
-                                  title: Text(snacks[index].pName),
-                                  subtitle: Text(
-                                      snacks[index].pPrice.toString() + "\$"),
+                            return Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: InkWell(
+                                onTap: ()=>{print(snacks[index].pName)},
+                                child: Container(
+                                  child: Card(
+                                    elevation: 5.0,
+                                    color: HexColor("d4e2d4"),
+                                    child: ListTile(
+                                      title: Text(snacks[index].pName),
+                                      subtitle: Text( "Rs."+
+                                          snacks[index].pPrice.toString() + "/-" ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             );
-                            //   Card(
-                            //   color: Colors.black,
-                            //   child: Text("hi"),
-                            // );
+
                           })),
                   Center(
                       child: GridView.builder(
@@ -141,20 +145,23 @@ Widget tabs(List<Product> products, BuildContext context) {
                           SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3, childAspectRatio: 4 / 3),
                           itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              child: Card(
-                                color: HexColor("d4e2d4"),
-                                child: ListTile(
-                                  title: Text(drinks[index].pName),
-                                  subtitle: Text(
-                                      drinks[index].pPrice.toString() + "\$"),
+                            return Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: InkWell(
+                                onTap: ()=>{print(snacks[index].pName)}, //function which writes the order to the database
+                                child: Container(
+                                  child: Card(
+                                    elevation: 5.0,
+                                    color: HexColor("d4e2d4"),
+                                    child: ListTile(
+                                      title: Text(drinks[index].pName),
+                                      subtitle: Text("Rs."+
+                                          drinks[index].pPrice.toString() + "/-"),
+                                    ),
+                                  ),
                                 ),
                               ),
                             );
-                            //   Card(
-                            //   color: Colors.black,
-                            //   child: Text("hi"),
-                            // );
                           })),
                   Center(
                     child: Text(
