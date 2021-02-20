@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:order_track/util/hexcolor.dart';
+import 'package:order_track/model/product.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
 
-class _HomeScreenState extends State<HomeScreen> {
+
+class HomeScreen extends StatelessWidget {
+
+  final List<Product> products = Product.getProducts();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               topBar(),
-              tabs(),
+              tabs(products,context),
               bottomBar(),
             ],
           ),
@@ -53,7 +54,19 @@ Widget topBar() {
   );
 }
 
-Widget tabs() {
+Widget tabs(List<Product> products, BuildContext context) {
+
+  List<Product> snacks = [];
+  List<Product> drinks = [];
+
+  for (Product product in products)
+    if (product.pType == "snack") {
+      snacks.add(product);
+    }
+    else
+      drinks.add(product);
+
+
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Align(
@@ -100,17 +113,49 @@ Widget tabs() {
               child: TabBarView(
                 children: [
                   Center(
-                    child: Text(
-                      "Snacks",
-                      style: TextStyle(color: HexColor("df7861")),
-                    ),
-                  ),
+                      child: GridView.builder(
+                          itemCount: snacks.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3, childAspectRatio: 4 / 3),
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                              child: Card(
+                                color: HexColor("d4e2d4"),
+                                child: ListTile(
+                                  title: Text(snacks[index].pName),
+                                  subtitle: Text(
+                                      snacks[index].pPrice.toString() + "\$"),
+                                ),
+                              ),
+                            );
+                            //   Card(
+                            //   color: Colors.black,
+                            //   child: Text("hi"),
+                            // );
+                          })),
                   Center(
-                    child: Text(
-                      "Drinks",
-                      style: TextStyle(color: HexColor("df7861")),
-                    ),
-                  ),
+                      child: GridView.builder(
+                          itemCount: drinks.length,
+                          gridDelegate:
+                          SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3, childAspectRatio: 4 / 3),
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                              child: Card(
+                                color: HexColor("d4e2d4"),
+                                child: ListTile(
+                                  title: Text(drinks[index].pName),
+                                  subtitle: Text(
+                                      drinks[index].pPrice.toString() + "\$"),
+                                ),
+                              ),
+                            );
+                            //   Card(
+                            //   color: Colors.black,
+                            //   child: Text("hi"),
+                            // );
+                          })),
                   Center(
                     child: Text(
                       "other",
