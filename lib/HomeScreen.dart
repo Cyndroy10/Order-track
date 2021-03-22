@@ -299,6 +299,10 @@ Widget orderList(String date, var sum, Map itemTrack) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator();
         }
+        if(snapshot.data.docs.length == 0)
+          {
+            return Text("No Orders For Today");
+          }
         return Column(
           children: [
             SingleChildScrollView(
