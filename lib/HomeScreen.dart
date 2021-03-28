@@ -16,13 +16,22 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: HexColor("fcf8e8"),
         body: Container(
           // height: MediaQuery.of(context).size.,
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              topBar(),
-              tabs(products, context),
-              bottomBar(context),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                topBar(),
+                Container(
+                  height: 810,
+                  child: Column(
+                    children: [
+                      tabs(products, context),
+                      bottomBar(context),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -61,8 +70,6 @@ Widget topBar() {
 }
 
 Widget orderTopBar(BuildContext context) {
-
-
   return Container(
     height: 100,
     child: Stack(
@@ -122,6 +129,7 @@ Widget orderTopBar(BuildContext context) {
 Widget tabs(List<Product> products, BuildContext context) {
   List<Product> snacks = [];
   List<Product> drinks = [];
+  // Product item;
 
   for (Product product in products)
     if (product.pType == "snack") {
@@ -138,106 +146,147 @@ Widget tabs(List<Product> products, BuildContext context) {
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
         height: 700,
         child: DefaultTabController(
-          length: 3,
+          length: 2,
           child: Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: AppBar(
-              shadowColor: HexColor("d4e2d4"),
-              // elevation: 8,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
-              backgroundColor: HexColor("fcf8e8"),
-              title: TabBar(
-                indicatorColor: HexColor("df7861"),
-                labelColor: HexColor("df7861"),
-                tabs: [
-                  Tab(
-                    child: Text(
-                      "Snacks",
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                shadowColor: HexColor("d4e2d4"),
+                // elevation: 8,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                backgroundColor: HexColor("fcf8e8"),
+                title: TabBar(
+                  indicatorColor: HexColor("df7861"),
+                  labelColor: HexColor("df7861"),
+                  tabs: [
+                    Tab(
+                      child: Text(
+                        "Snacks",
+                      ),
                     ),
-                  ),
-                  Tab(
-                    child: Text(
-                      "Drinks",
+                    Tab(
+                      child: Text(
+                        "Drinks",
+                      ),
                     ),
-                  ),
-                  Tab(
-                    child: Text(
-                      "other",
-                    ),
-                  ),
-                ],
+                    // Tab(
+                    //   child: Text(
+                    //     "other",
+                    //   ),
+                    // ),
+                  ],
+                ),
               ),
-            ),
-            body: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TabBarView(
-                children: [
-                  Center(
-                      child: GridView.builder(
-                          itemCount: snacks.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3, childAspectRatio: 4 / 3),
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: InkWell(
-                                onTap: () => {addData(snacks[index])},
-                                child: Container(
-                                  child: Card(
-                                    elevation: 5.0,
-                                    color: HexColor("d4e2d4"),
-                                    child: ListTile(
-                                      title: Text(snacks[index].pName),
-                                      subtitle: Text("Rs." +
-                                          snacks[index].pPrice.toString() +
-                                          "/-"),
+              body: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TabBarView(
+                  children: [
+                    Center(
+                        child: GridView.builder(
+                            itemCount: snacks.length,
+                            gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3, childAspectRatio: 4 / 3),
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: InkWell(
+                                  onTap: () => {addData(snacks[index])},
+                                  child: Container(
+                                    child: Card(
+                                      elevation: 5.0,
+                                      color: HexColor("d4e2d4"),
+                                      child: ListTile(
+                                        title: Text(snacks[index].pName),
+                                        subtitle: Text("Rs." +
+                                            snacks[index].pPrice.toString() +
+                                            "/-"),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          })),
-                  Center(
-                      child: GridView.builder(
-                          itemCount: drinks.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3, childAspectRatio: 4 / 3),
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: InkWell(
-                                onTap: () => addData(drinks[index]),
-                                child: Container(
-                                  child: Card(
-                                    elevation: 5.0,
-                                    color: HexColor("d4e2d4"),
-                                    child: ListTile(
-                                      title: Text(drinks[index].pName),
-                                      subtitle: Text("Rs." +
-                                          drinks[index].pPrice.toString() +
-                                          "/-"),
+                              );
+                            })),
+                    Center(
+                        child: GridView.builder(
+                            itemCount: drinks.length,
+                            gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3, childAspectRatio: 4 / 3),
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: InkWell(
+                                  onTap: () => addData(drinks[index]),
+                                  child: Container(
+                                    child: Card(
+                                      elevation: 5.0,
+                                      color: HexColor("d4e2d4"),
+                                      child: ListTile(
+                                        title: Text(drinks[index].pName),
+                                        subtitle: Text("Rs." +
+                                            drinks[index].pPrice.toString() +
+                                            "/-"),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          })),
-                  Center(
-                    child: Text(
-                      "other",
-                      style: TextStyle(color: HexColor("df7861")),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+                              );
+                            })),
+              //       Center(
+              //         child: Padding(
+              //           padding: const EdgeInsets.all(8.0),
+              //           child: Column(
+              //               children: [
+              //           Padding(
+              //           padding: const EdgeInsets.all(8.0),
+              //           child: TextField(
+              //             decoration: InputDecoration(
+              //                 border: OutlineInputBorder(),
+              //                 labelText: 'Item Name',
+              //                 hintText: 'Burger'),
+              //             onChanged: (text) {
+              //               item.pName = text;
+              //             },
+              //           ),
+              //         ),
+              //         Padding(
+              //           padding: const EdgeInsets.all(8.0),
+              //           child: TextField(
+              //             decoration: InputDecoration(
+              //                 border: OutlineInputBorder(),
+              //                 labelText: 'Item Price',
+              //                 hintText: '40'),
+              //             onChanged: (text) {
+              //               item.pPrice = int.parse(text);
+              //             },
+              //           ),
+              //         ),
+              //         Padding(
+              //             padding: const EdgeInsets.all(8.0),
+              //             child: ElevatedButton(
+              //                 style: ElevatedButton.styleFrom(
+              //                   primary:  HexColor("ecb499"),
+              //                 ),
+              //             onPressed: () => addData(item),
+              //             child: Text(
+              //               'Enter',
+              //               style: TextStyle(
+              //                 color: Colors.black,
+              //               ),
+              //             )),
+              //       )
+              //     ],
+              //   ),
+              // )),
+          ],
         ),
       ),
     ),
+  ),)
+  ,
+  )
+  ,
   );
 }
 
@@ -261,15 +310,26 @@ Widget bottomBar(BuildContext context) {
               color: HexColor("d4e2d4"),
               borderRadius: BorderRadius.all(Radius.circular(15.0))),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
                   icon: Icon(Icons.emoji_food_beverage_outlined),
                   tooltip: 'Orders',
-                  onPressed: () => {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return Orders();
-                        }))
-                      }),
+                  onPressed: () =>
+                  {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return Orders();
+                    }))
+                  }),
+              IconButton(
+                  icon: Icon(Icons.point_of_sale),
+                  tooltip: 'Sale',
+                  onPressed: () =>
+                  {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return Sales();
+                    }))
+                  }),
             ],
           ),
         ),
@@ -328,14 +388,17 @@ class _OrdersState extends State<Orders> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: HexColor("fcf8e8"),
-        body: Container(
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              orderTopBar(context),
-              orderList(formattedDate, sum, track),
-            ],
+        body: SingleChildScrollView(child:Container(
+          child: SingleChildScrollView(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                orderTopBar(context),
+                orderList(formattedDate, sum, track),
+              ],
+            ),
           ),
+        ),
         ),
       ),
     );
@@ -346,7 +409,6 @@ Widget orderList(String date, var sum, Map itemTrack) {
   Query orders = FirebaseFirestore.instance
       .collection('userOrders')
       .where("date", isEqualTo: date);
-
 
   final firestoreInstance = FirebaseFirestore.instance;
 
@@ -360,26 +422,363 @@ Widget orderList(String date, var sum, Map itemTrack) {
           return Text('Sorry, something went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return Container(height:700,child: Center(child: CircularProgressIndicator()));
         }
         if (snapshot.data.docs.length == 0) {
           return Text("No Orders For Today");
         }
+        return Container(
+          // height: 780,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Container(
+                  child: Text(
+                    "Date: " + date,
+                    style: TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.black54,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Times New Roman'),
+                  ),
+                ),
+              ),
+
+              //Orders
+              Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
+                        boxShadow: [
+                          BoxShadow(
+                              color: HexColor("d4e2d4"),
+                              blurRadius: 40.0,
+                              spreadRadius: 0.0,
+                              offset: Offset(0.0, 0.0))
+                        ],
+                        color: HexColor("d4e2d4"),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8.0, left: 8.0),
+                            child: Text(
+                              'Orders :',
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Times New Roman'),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0, right: 8.0),
+                          child: SingleChildScrollView(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 0.1, color: HexColor("d4e2d4")),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: HexColor("d4e2d4"),
+                                        blurRadius: 40.0,
+                                        spreadRadius: 0.0,
+                                        offset: Offset(0.0, 0.0))
+                                  ],
+                                  color: HexColor("d4e2d4"),
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(15.0))),
+                              height: 400,
+                              child: Scrollbar(
+                                child: ListView.builder(
+                                    itemCount: snapshot.data.docs.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0, top: 8.0, right: 8.0),
+                                            child: Container(
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    (index + 1).toString() +
+                                                        ". " +
+                                                        snapshot.data.docs
+                                                            .elementAt(index)
+                                                            .data()['itemName']
+                                                            .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 15.0,
+                                                        fontFamily:
+                                                        'Times New Roman'),
+                                                  ),
+                                                  Spacer(),
+                                                  Align(
+                                                    alignment: Alignment.topRight,
+                                                    child: Text(
+                                                      snapshot.data.docs
+                                                          .elementAt(index)
+                                                          .data()['itemPrice']
+                                                          .toString() +
+                                                          "₹",
+                                                      style: TextStyle(
+                                                          fontSize: 15.0,
+                                                          fontFamily:
+                                                          'Times New Roman'),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Divider(),
+                                        ],
+                                      );
+                                    }),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
+
+              //Sale Summary
+              Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    height: 220,
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
+                        boxShadow: [
+                          BoxShadow(
+                              color: HexColor("d4e2d4"),
+                              blurRadius: 40.0,
+                              spreadRadius: 0.0,
+                              offset: Offset(0.0, 0.0))
+                        ],
+                        color: HexColor("d4e2d4"),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8.0, left: 8.0),
+                            child: Text(
+                              'Sale Summary:',
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Times New Roman'),
+                            ),
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 0.1, color: HexColor("d4e2d4")),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: HexColor("d4e2d4"),
+                                      blurRadius: 40.0,
+                                      spreadRadius: 0.0,
+                                      offset: Offset(0.0, 0.0))
+                                ],
+                                color: HexColor("d4e2d4"),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(15.0))),
+                            height: 185,
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 8.0, left: 12.0, bottom: 8.0, right: 8.0),
+                              child: Scrollbar(
+                                child: ListView.builder(
+                                    itemCount: itemList.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Column(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.only(right: 8.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  itemList[index].toString() +
+                                                      " :",
+                                                  style: TextStyle(
+                                                      fontSize: 15.0,
+                                                      fontFamily:
+                                                      'Times New Roman'),
+                                                ),
+                                                Spacer(),
+                                                Text(
+                                                  itemCount[index].toString() +
+                                                      " pcs",
+                                                  style: TextStyle(
+                                                      fontSize: 15.0,
+                                                      fontFamily:
+                                                      'Times New Roman'),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Divider(),
+                                        ],
+                                      );
+                                    }),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        // border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //       // color: HexColor("d4e2d4"),
+                        //       blurRadius: 10.0,
+                        //       spreadRadius: 0.0,
+                        //       offset: Offset(0.0, 0.0))
+                        // ],
+                        // color: HexColor("ecb499"),
+                          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            "Total Sale: " + sum.toString() + "₹",
+                            style: TextStyle(
+                                fontSize: 25.0,
+                                color: Colors.black45,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Times New Roman'),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        // border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
+
+                          color: HexColor("ecb390"),
+                          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: InkWell(
+                          onTap: () =>
+                          {
+                            firestoreInstance.collection("Sale").add({
+                              "date": date,
+                              "totalSale": sum,
+                            }),
+                          },
+                          child: Center(
+                            child: Text(
+                              "Save",
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.black45,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Times New Roman'),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      });
+}
+
+
+class Sales extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: HexColor("fcf8e8"),
+        body: Container(
+          child: SingleChildScrollView(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                orderTopBar(context),
+                sales(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+Widget sales(){
+  Query sales = FirebaseFirestore.instance
+      .collection('Sale');
+
+  return StreamBuilder<QuerySnapshot>(
+      stream: sales.snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text('Sorry, something went wrong');
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        }
+        if (snapshot.data.docs.length == 0) {
+          return Text("No Sale");
+        }
         return Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top:8.0),
-              child: Container(child: Text("Date: "+date,style: TextStyle(
-                  fontSize: 15.0,
-                  color: Colors.black54,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Times New Roman'),),),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(top: 8.0),
+            //   child: Container(
+            //     child: Text(
+            //       "Date: " + date,
+            //       style: TextStyle(
+            //           fontSize: 15.0,
+            //           color: Colors.black54,
+            //           fontWeight: FontWeight.bold,
+            //           fontFamily: 'Times New Roman'),
+            //     ),
+            //   ),
+            // ),
 
             //Orders
             Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
+                  height: 780,
                   decoration: BoxDecoration(
                       border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
                       boxShadow: [
@@ -396,11 +795,11 @@ Widget orderList(String date, var sum, Map itemTrack) {
                       Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 8.0, left: 8.0),
+                          padding: const EdgeInsets.only(top: 10.0, left: 8.0),
                           child: Text(
-                            'Orders :',
+                            'Sale :\n',
                             style: TextStyle(
-                                fontSize: 20.0,
+                                fontSize: 25.0,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Times New Roman'),
                           ),
@@ -422,7 +821,7 @@ Widget orderList(String date, var sum, Map itemTrack) {
                                 ],
                                 color: HexColor("d4e2d4"),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(15.0))),
+                                BorderRadius.all(Radius.circular(15.0))),
                             height: 400,
                             child: Scrollbar(
                               child: ListView.builder(
@@ -442,26 +841,26 @@ Widget orderList(String date, var sum, Map itemTrack) {
                                                       ". " +
                                                       snapshot.data.docs
                                                           .elementAt(index)
-                                                          .data()['itemName']
+                                                          .data()['date']
                                                           .toString(),
                                                   style: TextStyle(
                                                       fontSize: 15.0,
                                                       fontFamily:
-                                                          'Times New Roman'),
+                                                      'Times New Roman'),
                                                 ),
                                                 Spacer(),
                                                 Align(
                                                   alignment: Alignment.topRight,
                                                   child: Text(
                                                     snapshot.data.docs
-                                                            .elementAt(index)
-                                                            .data()['itemPrice']
-                                                            .toString() +
+                                                        .elementAt(index)
+                                                        .data()['totalSale']
+                                                        .toString() +
                                                         "₹",
                                                     style: TextStyle(
                                                         fontSize: 15.0,
                                                         fontFamily:
-                                                            'Times New Roman'),
+                                                        'Times New Roman'),
                                                   ),
                                                 ),
                                               ],
@@ -480,162 +879,10 @@ Widget orderList(String date, var sum, Map itemTrack) {
                   ),
                 )),
 
-            //Sale Summary
-            Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
-                      boxShadow: [
-                        BoxShadow(
-                            color: HexColor("d4e2d4"),
-                            blurRadius: 40.0,
-                            spreadRadius: 0.0,
-                            offset: Offset(0.0, 0.0))
-                      ],
-                      color: HexColor("d4e2d4"),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 8.0, left: 8.0),
-                          child: Text(
-                            'Sale Summary:',
-                            style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Times New Roman'),
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 0.1, color: HexColor("d4e2d4")),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: HexColor("d4e2d4"),
-                                    blurRadius: 40.0,
-                                    spreadRadius: 0.0,
-                                    offset: Offset(0.0, 0.0))
-                              ],
-                              color: HexColor("d4e2d4"),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0))),
-                          height: 150,
-                          width: MediaQuery.of(context).size.width,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8.0, left: 12.0, bottom: 8.0, right: 8.0),
-                            child: Scrollbar(
-                              child: ListView.builder(
-                                  itemCount: itemList.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Column(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 8.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                itemList[index].toString() +
-                                                    " :",
-                                                style: TextStyle(
-                                                    fontSize: 15.0,
-                                                    fontFamily:
-                                                        'Times New Roman'),
-                                              ),
-                                              Spacer(),
-                                              Text(
-                                                itemCount[index].toString() +
-                                                    " pcs",
-                                                style: TextStyle(
-                                                    fontSize: 15.0,
-                                                    fontFamily:
-                                                        'Times New Roman'),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Divider(),
-                                      ],
-                                    );
-                                  }),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                        // border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //       // color: HexColor("d4e2d4"),
-                        //       blurRadius: 10.0,
-                        //       spreadRadius: 0.0,
-                        //       offset: Offset(0.0, 0.0))
-                        // ],
-                        // color: HexColor("ecb499"),
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Text(
-                          "Total Sale: " + sum.toString() + "₹",
-                          style: TextStyle(
-                              fontSize: 25.0,
-                              color: Colors.black45,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Times New Roman'),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                        // border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
 
-                        color: HexColor("ecb390"),
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: InkWell(
-                        onTap: ()=>{
-                                      firestoreInstance.collection("Sale").add({"date" : date, "totalSale" : sum,}),
-                                   },
-                        child: Center(
-                        child: Text(
-                          "Save",
-                          style: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.black45,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Times New Roman'),
-                        ),
-                      ),),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
         );
       });
 }
+
+
