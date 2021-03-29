@@ -15,14 +15,14 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: HexColor("fcf8e8"),
         body: Container(
-          // height: MediaQuery.of(context).size.,
+          // height: MediaQuery.of(context).size.height*0.3,
           child: SingleChildScrollView(
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 topBar(),
                 Container(
-                  height: 810,
+                  height: MediaQuery.of(context).size.height * 0.85,
                   child: Column(
                     children: [
                       tabs(products, context),
@@ -138,155 +138,156 @@ Widget tabs(List<Product> products, BuildContext context) {
       drinks.add(product);
 
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.only(top:8.0,left: 8.0, right: 8.0, ),
     child: Align(
       alignment: Alignment.center,
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        height: 700,
+        height: MediaQuery.of(context).size.height * 0.76,
         child: DefaultTabController(
           length: 2,
           child: Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                shadowColor: HexColor("d4e2d4"),
-                // elevation: 8,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                backgroundColor: HexColor("fcf8e8"),
-                title: TabBar(
-                  indicatorColor: HexColor("df7861"),
-                  labelColor: HexColor("df7861"),
-                  tabs: [
-                    Tab(
-                      child: Text(
-                        "Snacks",
-                      ),
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              shadowColor: HexColor("d4e2d4"),
+              // elevation: 8,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              backgroundColor: HexColor("fcf8e8"),
+              title: TabBar(
+                indicatorColor: HexColor("df7861"),
+                labelColor: HexColor("df7861"),
+                tabs: [
+                  Tab(
+                    child: Text(
+                      "Snacks",
                     ),
-                    Tab(
-                      child: Text(
-                        "Drinks",
-                      ),
+                  ),
+                  Tab(
+                    child: Text(
+                      "Drinks",
                     ),
-                    // Tab(
-                    //   child: Text(
-                    //     "other",
-                    //   ),
-                    // ),
-                  ],
-                ),
+                  ),
+                  // Tab(
+                  //   child: Text(
+                  //     "other",
+                  //   ),
+                  // ),
+                ],
               ),
-              body: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TabBarView(
-                  children: [
-                    Center(
-                        child: GridView.builder(
-                            itemCount: snacks.length,
-                            gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3, childAspectRatio: 4 / 3),
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: InkWell(
-                                  onTap: () => {addData(snacks[index])},
-                                  child: Container(
-                                    child: Card(
-                                      elevation: 5.0,
-                                      color: HexColor("d4e2d4"),
-                                      child: ListTile(
-                                        title: Text(snacks[index].pName),
-                                        subtitle: Text("Rs." +
-                                            snacks[index].pPrice.toString() +
-                                            "/-"),
-                                      ),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TabBarView(
+                children: [
+                  Center(
+                      child: GridView.builder(
+                          itemCount: snacks.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3, childAspectRatio: 4 / 3),
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: InkWell(
+                                splashColor: Colors.black,
+                                onTap: () => {addData(snacks[index])},
+                                child: Container(
+                                  child: Card(
+                                    elevation: 5.0,
+                                    color: HexColor("d4e2d4"),
+                                    child: ListTile(
+                                      title: Text(snacks[index].pName),
+                                      subtitle: Text("Rs." +
+                                          snacks[index].pPrice.toString() +
+                                          "/-"),
                                     ),
                                   ),
                                 ),
-                              );
-                            })),
-                    Center(
-                        child: GridView.builder(
-                            itemCount: drinks.length,
-                            gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3, childAspectRatio: 4 / 3),
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: InkWell(
-                                  onTap: () => addData(drinks[index]),
-                                  child: Container(
-                                    child: Card(
-                                      elevation: 5.0,
-                                      color: HexColor("d4e2d4"),
-                                      child: ListTile(
-                                        title: Text(drinks[index].pName),
-                                        subtitle: Text("Rs." +
-                                            drinks[index].pPrice.toString() +
-                                            "/-"),
-                                      ),
+                              ),
+                            );
+                          })),
+                  Center(
+                      child: GridView.builder(
+                          itemCount: drinks.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3, childAspectRatio: 4 / 3),
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: InkWell(
+                                splashColor: Colors.black,
+                                onTap: () => addData(drinks[index]),
+                                child: Container(
+                                  child: Card(
+                                    elevation: 5.0,
+                                    color: HexColor("d4e2d4"),
+                                    child: ListTile(
+                                      title: Text(drinks[index].pName),
+                                      subtitle: Text("Rs." +
+                                          drinks[index].pPrice.toString() +
+                                          "/-"),
                                     ),
                                   ),
                                 ),
-                              );
-                            })),
-              //       Center(
-              //         child: Padding(
-              //           padding: const EdgeInsets.all(8.0),
-              //           child: Column(
-              //               children: [
-              //           Padding(
-              //           padding: const EdgeInsets.all(8.0),
-              //           child: TextField(
-              //             decoration: InputDecoration(
-              //                 border: OutlineInputBorder(),
-              //                 labelText: 'Item Name',
-              //                 hintText: 'Burger'),
-              //             onChanged: (text) {
-              //               item.pName = text;
-              //             },
-              //           ),
-              //         ),
-              //         Padding(
-              //           padding: const EdgeInsets.all(8.0),
-              //           child: TextField(
-              //             decoration: InputDecoration(
-              //                 border: OutlineInputBorder(),
-              //                 labelText: 'Item Price',
-              //                 hintText: '40'),
-              //             onChanged: (text) {
-              //               item.pPrice = int.parse(text);
-              //             },
-              //           ),
-              //         ),
-              //         Padding(
-              //             padding: const EdgeInsets.all(8.0),
-              //             child: ElevatedButton(
-              //                 style: ElevatedButton.styleFrom(
-              //                   primary:  HexColor("ecb499"),
-              //                 ),
-              //             onPressed: () => addData(item),
-              //             child: Text(
-              //               'Enter',
-              //               style: TextStyle(
-              //                 color: Colors.black,
-              //               ),
-              //             )),
-              //       )
-              //     ],
-              //   ),
-              // )),
-          ],
+                              ),
+                            );
+                          })),
+                  //       Center(
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.all(8.0),
+                  //           child: Column(
+                  //               children: [
+                  //           Padding(
+                  //           padding: const EdgeInsets.all(8.0),
+                  //           child: TextField(
+                  //             decoration: InputDecoration(
+                  //                 border: OutlineInputBorder(),
+                  //                 labelText: 'Item Name',
+                  //                 hintText: 'Burger'),
+                  //             onChanged: (text) {
+                  //               item.pName = text;
+                  //             },
+                  //           ),
+                  //         ),
+                  //         Padding(
+                  //           padding: const EdgeInsets.all(8.0),
+                  //           child: TextField(
+                  //             decoration: InputDecoration(
+                  //                 border: OutlineInputBorder(),
+                  //                 labelText: 'Item Price',
+                  //                 hintText: '40'),
+                  //             onChanged: (text) {
+                  //               item.pPrice = int.parse(text);
+                  //             },
+                  //           ),
+                  //         ),
+                  //         Padding(
+                  //             padding: const EdgeInsets.all(8.0),
+                  //             child: ElevatedButton(
+                  //                 style: ElevatedButton.styleFrom(
+                  //                   primary:  HexColor("ecb499"),
+                  //                 ),
+                  //             onPressed: () => addData(item),
+                  //             child: Text(
+                  //               'Enter',
+                  //               style: TextStyle(
+                  //                 color: Colors.black,
+                  //               ),
+                  //             )),
+                  //       )
+                  //     ],
+                  //   ),
+                  // )),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     ),
-  ),)
-  ,
-  )
-  ,
   );
 }
 
@@ -295,7 +296,7 @@ Widget bottomBar(BuildContext context) {
     child: Align(
       alignment: FractionalOffset.bottomCenter,
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
         child: Container(
           height: 60,
           decoration: BoxDecoration(
@@ -315,21 +316,19 @@ Widget bottomBar(BuildContext context) {
               IconButton(
                   icon: Icon(Icons.emoji_food_beverage_outlined),
                   tooltip: 'Orders',
-                  onPressed: () =>
-                  {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) {
-                      return Orders();
-                    }))
-                  }),
+                  onPressed: () => {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+                          return Orders();
+                        }))
+                      }),
               IconButton(
                   icon: Icon(Icons.point_of_sale),
                   tooltip: 'Sale',
-                  onPressed: () =>
-                  {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) {
-                      return Sales();
-                    }))
-                  }),
+                  onPressed: () => {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+                          return Sales();
+                        }))
+                      }),
             ],
           ),
         ),
@@ -358,6 +357,7 @@ class _OrdersState extends State<Orders> {
 
     var orders = await FirebaseFirestore.instance
         .collection('userOrders')
+        .orderBy('timestamp', descending: false)
         .where("date", isEqualTo: formattedDate)
         .get();
 
@@ -388,7 +388,7 @@ class _OrdersState extends State<Orders> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: HexColor("fcf8e8"),
-        body: SingleChildScrollView(child:Container(
+        body: Container(
           child: SingleChildScrollView(
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -399,7 +399,6 @@ class _OrdersState extends State<Orders> {
             ),
           ),
         ),
-        ),
       ),
     );
   }
@@ -408,6 +407,7 @@ class _OrdersState extends State<Orders> {
 Widget orderList(String date, var sum, Map itemTrack) {
   Query orders = FirebaseFirestore.instance
       .collection('userOrders')
+      .orderBy('timestamp', descending: false)
       .where("date", isEqualTo: date);
 
   final firestoreInstance = FirebaseFirestore.instance;
@@ -422,10 +422,18 @@ Widget orderList(String date, var sum, Map itemTrack) {
           return Text('Sorry, something went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Container(height:700,child: Center(child: CircularProgressIndicator()));
+          return Container(
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: Center(
+                  child: CircularProgressIndicator(
+                valueColor:
+                    new AlwaysStoppedAnimation<Color>(HexColor("d4e2d4")),
+              )));
         }
         if (snapshot.data.docs.length == 0) {
-          return Text("No Orders For Today");
+          return Container(
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: Center(child: Text("No Orders For Today")));
         }
         return Container(
           // height: 780,
@@ -450,7 +458,8 @@ Widget orderList(String date, var sum, Map itemTrack) {
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
                     decoration: BoxDecoration(
-                        border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
+                        border:
+                            Border.all(width: 0.1, color: HexColor("d4e2d4")),
                         boxShadow: [
                           BoxShadow(
                               color: HexColor("d4e2d4"),
@@ -476,7 +485,8 @@ Widget orderList(String date, var sum, Map itemTrack) {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0, right: 8.0),
+                          padding:
+                              const EdgeInsets.only(bottom: 8.0, right: 8.0),
                           child: SingleChildScrollView(
                             child: Container(
                               decoration: BoxDecoration(
@@ -491,8 +501,8 @@ Widget orderList(String date, var sum, Map itemTrack) {
                                   ],
                                   color: HexColor("d4e2d4"),
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0))),
-                              height: 400,
+                                      BorderRadius.all(Radius.circular(15.0))),
+                              height: MediaQuery.of(context).size.height * 0.35,
                               child: Scrollbar(
                                 child: ListView.builder(
                                     itemCount: snapshot.data.docs.length,
@@ -502,7 +512,9 @@ Widget orderList(String date, var sum, Map itemTrack) {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 10.0, top: 8.0, right: 8.0),
+                                                left: 10.0,
+                                                top: 8.0,
+                                                right: 8.0),
                                             child: Container(
                                               child: Row(
                                                 children: [
@@ -516,21 +528,23 @@ Widget orderList(String date, var sum, Map itemTrack) {
                                                     style: TextStyle(
                                                         fontSize: 15.0,
                                                         fontFamily:
-                                                        'Times New Roman'),
+                                                            'Times New Roman'),
                                                   ),
                                                   Spacer(),
                                                   Align(
-                                                    alignment: Alignment.topRight,
+                                                    alignment:
+                                                        Alignment.topRight,
                                                     child: Text(
                                                       snapshot.data.docs
-                                                          .elementAt(index)
-                                                          .data()['itemPrice']
-                                                          .toString() +
+                                                              .elementAt(index)
+                                                              .data()[
+                                                                  'itemPrice']
+                                                              .toString() +
                                                           "₹",
                                                       style: TextStyle(
                                                           fontSize: 15.0,
                                                           fontFamily:
-                                                          'Times New Roman'),
+                                                              'Times New Roman'),
                                                     ),
                                                   ),
                                                 ],
@@ -553,9 +567,9 @@ Widget orderList(String date, var sum, Map itemTrack) {
               Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
-                    height: 220,
                     decoration: BoxDecoration(
-                        border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
+                        border:
+                            Border.all(width: 0.1, color: HexColor("d4e2d4")),
                         boxShadow: [
                           BoxShadow(
                               color: HexColor("d4e2d4"),
@@ -594,15 +608,15 @@ Widget orderList(String date, var sum, Map itemTrack) {
                                 ],
                                 color: HexColor("d4e2d4"),
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                            height: 185,
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
+                                    BorderRadius.all(Radius.circular(15.0))),
+                            height: MediaQuery.of(context).size.height * 0.25,
+                            width: MediaQuery.of(context).size.width,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  top: 8.0, left: 12.0, bottom: 8.0, right: 8.0),
+                                  top: 8.0,
+                                  left: 12.0,
+                                  bottom: 8.0,
+                                  right: 8.0),
                               child: Scrollbar(
                                 child: ListView.builder(
                                     itemCount: itemList.length,
@@ -611,11 +625,11 @@ Widget orderList(String date, var sum, Map itemTrack) {
                                       return Column(
                                         children: [
                                           Padding(
-                                            padding:
-                                            const EdgeInsets.only(right: 8.0),
+                                            padding: const EdgeInsets.only(
+                                                right: 8.0),
                                             child: Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                                  MainAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   itemList[index].toString() +
@@ -623,7 +637,7 @@ Widget orderList(String date, var sum, Map itemTrack) {
                                                   style: TextStyle(
                                                       fontSize: 15.0,
                                                       fontFamily:
-                                                      'Times New Roman'),
+                                                          'Times New Roman'),
                                                 ),
                                                 Spacer(),
                                                 Text(
@@ -632,7 +646,7 @@ Widget orderList(String date, var sum, Map itemTrack) {
                                                   style: TextStyle(
                                                       fontSize: 15.0,
                                                       fontFamily:
-                                                      'Times New Roman'),
+                                                          'Times New Roman'),
                                                 ),
                                               ],
                                             ),
@@ -656,16 +670,17 @@ Widget orderList(String date, var sum, Map itemTrack) {
                     Container(
                       height: 50,
                       decoration: BoxDecoration(
-                        // border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //       // color: HexColor("d4e2d4"),
-                        //       blurRadius: 10.0,
-                        //       spreadRadius: 0.0,
-                        //       offset: Offset(0.0, 0.0))
-                        // ],
-                        // color: HexColor("ecb499"),
-                          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                          // border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
+                          // boxShadow: [
+                          //   BoxShadow(
+                          //       // color: HexColor("d4e2d4"),
+                          //       blurRadius: 10.0,
+                          //       spreadRadius: 0.0,
+                          //       offset: Offset(0.0, 0.0))
+                          // ],
+                          // color: HexColor("ecb499"),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0))),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
@@ -683,18 +698,21 @@ Widget orderList(String date, var sum, Map itemTrack) {
                     Container(
                       height: 50,
                       decoration: BoxDecoration(
-                        // border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
+                          // border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
 
                           color: HexColor("ecb390"),
-                          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0))),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
-                          onTap: () =>
-                          {
+                          
+                          onTap: () => {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sale Saved'))),
                             firestoreInstance.collection("Sale").add({
                               "date": date,
                               "totalSale": sum,
+                              "timestamp": Timestamp.now()
                             }),
                           },
                           child: Center(
@@ -719,7 +737,6 @@ Widget orderList(String date, var sum, Map itemTrack) {
       });
 }
 
-
 class Sales extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -742,9 +759,10 @@ class Sales extends StatelessWidget {
   }
 }
 
-Widget sales(){
+Widget sales() {
   Query sales = FirebaseFirestore.instance
-      .collection('Sale');
+      .collection('Sale')
+      .orderBy('timestamp', descending: false);
 
   return StreamBuilder<QuerySnapshot>(
       stream: sales.snapshots(),
@@ -753,10 +771,18 @@ Widget sales(){
           return Text('Sorry, something went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return Container(
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: Center(
+                  child: CircularProgressIndicator(
+                valueColor:
+                    new AlwaysStoppedAnimation<Color>(HexColor("d4e2d4")),
+              )));
         }
         if (snapshot.data.docs.length == 0) {
-          return Text("No Sale");
+          return Container(
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: Center(child: Text("No Sale")));
         }
         return Column(
           children: [
@@ -778,7 +804,7 @@ Widget sales(){
             Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
-                  height: 780,
+                  height: MediaQuery.of(context).size.height * 0.82,
                   decoration: BoxDecoration(
                       border: Border.all(width: 0.1, color: HexColor("d4e2d4")),
                       boxShadow: [
@@ -821,7 +847,7 @@ Widget sales(){
                                 ],
                                 color: HexColor("d4e2d4"),
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
+                                    BorderRadius.all(Radius.circular(15.0))),
                             height: 400,
                             child: Scrollbar(
                               child: ListView.builder(
@@ -846,21 +872,21 @@ Widget sales(){
                                                   style: TextStyle(
                                                       fontSize: 15.0,
                                                       fontFamily:
-                                                      'Times New Roman'),
+                                                          'Times New Roman'),
                                                 ),
                                                 Spacer(),
                                                 Align(
                                                   alignment: Alignment.topRight,
                                                   child: Text(
                                                     snapshot.data.docs
-                                                        .elementAt(index)
-                                                        .data()['totalSale']
-                                                        .toString() +
+                                                            .elementAt(index)
+                                                            .data()['totalSale']
+                                                            .toString() +
                                                         "₹",
                                                     style: TextStyle(
                                                         fontSize: 15.0,
                                                         fontFamily:
-                                                        'Times New Roman'),
+                                                            'Times New Roman'),
                                                   ),
                                                 ),
                                               ],
@@ -878,11 +904,7 @@ Widget sales(){
                     ],
                   ),
                 )),
-
-
           ],
         );
       });
 }
-
-

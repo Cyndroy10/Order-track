@@ -13,6 +13,7 @@ void addData(Product product){
       "itemName" : product.pName,
       "itemPrice" : product.pPrice,
       "date" : formattedDate,
+      "timestamp": Timestamp.now()
     }
   );
   // getData();
